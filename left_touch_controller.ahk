@@ -1,11 +1,24 @@
+; This script is for the left hand Touch controller. Grip and Trigger buttons act as modifiers. You might have use "configure vjoy" utility to add extra buttons on the virtual joystick. Here are the mappings used:
+; X touch button = vjoy button 1
+; Y = 2
+; thumbstick click = 4
+; thumbstick left/right/up/down = 5,6,7,8
+; Grip + X = output Pitch/Roll/Yaw from Touch to X,Y,Z axis on vjoy
+; Grip + Y = output Pitch/Roll/Yaw from Touch to RX,RY,RZ axis on vjoy
+; Grip + thumbstick left/right/up/down = Buttons 17,18,19,20
+; Trigger + X = button 16
+; Trigger + Y = button 17
+; Trigger + thumbstick left/right/up/down = 11,12,13,14
+; Grip + Trigger + X = Recenter (trim) Pitch/Roll/Yaw Axes to current orientation.
+
 #include auto_oculus_touch.ahk
 
-; This is used to adjust the starting default center point for the axis
+; This is used to adjust the starting default center point (trim) for each axis - can be centered afterwards using Grip + Trigger + X
 pitchoffset :=20
 yawoffset :=0
 rolloffset :=0
 
-; sensitivity
+; sensitivity - changes sensitivity of axes. Higher number means less controller movement is needed to reach maximum joystick deflection.
 pitchSens := 3
 rollSens := 3
 yawSens := 5
