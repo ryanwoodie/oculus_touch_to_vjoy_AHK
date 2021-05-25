@@ -1,5 +1,5 @@
 # oculus_touch_to_vjoy_AHK
-Autohotkey script that maps Oculus Touch buttons and thumbsticks to a bunch of Vjoy (virtual joystick) buttons, in addition to the controller hand movement pitch/roll/yaw being mapped to Vjoy joystick axes.
+Autohotkey script that maps Oculus Touch buttons and thumb-sticks to a bunch of Vjoy (virtual joystick) buttons, in addition to the controller hand movement pitch/roll/yaw being mapped to Vjoy joystick axes.
 
 Presently the AHK script is for Left hand controller. I originally created it to be able to have more joystick controls/buttons available while using Condor Soaring Simulator in VR.  See the comments in the AHK script for more details on the mapping.
 
