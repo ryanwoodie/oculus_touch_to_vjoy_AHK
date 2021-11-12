@@ -24,13 +24,6 @@ rollSens := 3
 yawSens := 5
 
 ; Start the Oculus sdk.
-
-map(x,in_min,in_max,out_min,out_max) {
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
-}
-
-
-
 InitOculus()
 InitvJoy(1)
 
@@ -61,7 +54,7 @@ touchPressed := GetTouchPressed()
 touchReleased := GetTouchReleased()
 
 ; Modifier Conditions=
-Mod1 :=  leftHandTrigger > 0.7
+Mod1 :=  leftHandTrigger > 0.7 
 Mod2 :=  leftIndexTrigger > 0.7
 ModAll := Mod1 OR Mod2
 ModBoth := Mod1 AND Mod2
@@ -69,7 +62,7 @@ ModBoth := Mod1 AND Mod2
 
 ;No Modifiers
 
-if NOT ModAll
+if NOT ModAll 
 {
 if pressed & ovrX
 SetvJoyButton(1,1)
@@ -77,17 +70,13 @@ if released & ovrX
 SetvJoyButton(1,0)
 if pressed & ovrY
 SetvJoyButton(2,1)
-if released & ovrY
+if released & ovrY 
 SetvJoyButton(2,0)
 
 if pressed & ovrLThumb
-{
-	if (tog := !tog)
-     stick := 1
-	else
-	   stick := 2
-     
-}
+SetvJoyButton(4,1)
+if released & ovrLThumb
+SetvJoyButton(4,0)
 
 if leftX < -0.7
         SetvJoyButton(5,1)
@@ -156,35 +145,13 @@ if leftY > .7
 
 if Mod2 AND NOT Mod1
 {
-
-if leftX < -0.7
-        SetvJoyButton(21,1)
-	else
-        SetvJoyButton(21,0)
-
-if leftX > .7
-        SetvJoyButton(22,1)
-	else
-        SetvJoyButton(22,0)
-
-if leftY < -0.7
-        SetvJoyButton(23,1)
-	else
-        SetvJoyButton(23,0)
-
-if leftY > .7
-        SetvJoyButton(24,1)
-	else
-        SetvJoyButton(24,0)
-
-
 if pressed & ovrX
 SetvJoyButton(15,1)
 if released & ovrX
 SetvJoyButton(15,0)
 if pressed & ovrY
 SetvJoyButton(16,1)
-if released & ovrY
+if released & ovrY 
 SetvJoyButton(16,0)
 
 if GetPitch(leftHand) < -30
@@ -229,28 +196,15 @@ rolloffset :=GetRoll(LeftHand)
 
 }
 
-joy := GetKeyState("6JoyZ")
-joy1 := GetKeyState("6JoyU")
-joy2 := GetKeyState("6JoyV")
-joy3 := GetKeyState("6JoyR")
-joy6 := map(GetKeyState("6JoyV"),0,100,-1,1)
-
-if stick = 1
-SetvJoyAxis(HID_USAGE_X,joy6)
-
-if stick = 2
-SetvJoyAxis(HID_USAGE_Z,joy6)
-
-;SetvJoyAxis(HID_USAGE_X,joy6)
+SetvJoyAxis(HID_USAGE_X, (leftRollX - rolloffset)/(180/rollSens))
 SetvJoyAxis(HID_USAGE_Y, (leftPitchX - pitchoffset)/(90/pitchSens))
-;SetvJoyAxis(HID_USAGE_Z, (leftYawX - yawoffset)/(180/yawSens))
+SetvJoyAxis(HID_USAGE_Z, (leftYawX - yawoffset)/(180/yawSens))
 SetvJoyAxis(HID_USAGE_RX, (leftRollY - rolloffset)/(180/rollSens))
 SetvJoyAxis(HID_USAGE_RY, (leftPitchY - pitchoffset)/(90/pitchSens))
 SetvJoyAxis(HID_USAGE_RZ, (leftYawY - yawoffset)/(180/yawSens))
 
 ;SetvJoyAxis(HID_USAGE_X, (leftYaw)/40.0)
 
-;ToolTip, `n joy: %joy% 1: %joy1% 2: %joy2% 3 %joy3% `n %stick%
 
 Sleep, 10
 }
